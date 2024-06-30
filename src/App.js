@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import CreateCustomer from "./featurs/customers/CreateCustomer";
+import Customer from "./featurs/customers/Customer";
+import AccountOperations from "./featurs/accounts/AccountOperations";
+import BalanceDisplay from "./featurs/accounts/BalanceDisplay";
+import { useSelector } from "react-redux";
+import ReactFullpage from "@fullpage/react-fullpage";
 
 function App() {
+  const fullName = useSelector((store) => store.customer.fullName);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>
+        <h1>🏦 The React-Redux Bank ⚛️</h1>
+        {fullName === "" ? (
+          <CreateCustomer />
+        ) : (
+          <>
+            <Customer />
+            <AccountOperations />
+            <BalanceDisplay />
+          </>
+        )}
+      </div>
+    </>
   );
 }
 
 export default App;
+// {/* <ReactFullpage
+//         scrollingSpeed={1000}
+//         render={({ state, fullpageApi }) => {
+//           return (
+//             <ReactFullpage.Wrapper>
+//               <div style={{background:'orange'}} className="section">
+//                 <p>Section 1 (welcome to fullpage.js)</p>
+//                 <button onClick={() => fullpageApi.moveSectionDown()}>
+//                   Click me to move down
+//                 </button>
+//               </div>
+//               <div style={{background:'green'}} className="section">
+//                 <p>Section 2</p>
+//               </div>
+//             </ReactFullpage.Wrapper>
+//           );
+//          }}/> */}
